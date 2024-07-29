@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: Client Get Service API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: server
+paths:
+  /client/get:
+    post:
+      summary: Get clients
+      operationId: demo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientGetRequest'
+      responses:
+        '200':
+          description: Successful get clients
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientGetResponse'
+        '400':
+          description: Invalid get clients
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      $ref: '../java/shop/household/client/get/service/api/error/Error.json'
+    ClientGetRequest:
+      $ref: '../java/shop/household/client/get/service/api/request/ClientGetRequest.json'
+    ClientGetResponse:
+      $ref: '../java/shop/household/client/get/service/api/response/ClientGetResponse.json'

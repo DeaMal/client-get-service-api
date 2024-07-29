@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ClientGetResponse",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "boolean",
+      "description": "Status"
+    },
+    "clients": {
+      "type": "array",
+      "items": {
+        "$ref": "Client.json"
+      }
+    },
+    "error": {
+      "$ref": "../error/Error.json"
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "if": {
+    "properties": { "status": { "const": false } }
+  },
+  "then": {
+    "required": ["error"],
+    "not": {
+      "required": ["clients"]
+    }
+  },
+  "else": {
+    "required": ["clients"],
+    "not": {
+      "required": ["error"]
+    }
+  }
+}
